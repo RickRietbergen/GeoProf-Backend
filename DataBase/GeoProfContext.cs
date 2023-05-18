@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GeoProf.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GeoProf.DataBase
 {
@@ -8,5 +9,7 @@ namespace GeoProf.DataBase
         {
 
         }
+
+        public DbSet<User> Users { get; set; }
     }
 }
