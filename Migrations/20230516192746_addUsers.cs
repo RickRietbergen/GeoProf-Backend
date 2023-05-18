@@ -16,8 +16,7 @@ namespace GeoProf.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Vakantie = table.Column<int>(type: "int", nullable: false),
                     Persoonlijk = table.Column<int>(type: "int", nullable: false),
                     Ziek = table.Column<int>(type: "int", nullable: false),
