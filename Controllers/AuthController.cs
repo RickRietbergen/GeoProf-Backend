@@ -2,6 +2,7 @@
 using GeoProf.Entities;
 using GeoProf.Enums;
 using GeoProf.Models;
+using GeoProf.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,11 +13,13 @@ namespace GeoProf.Controllers
     public class AuthController : BaseController
     {
         private readonly GeoProfContext dataContext;
+        private readonly JWTService jwtService;
 
 
-        public AuthController(GeoProfContext dataContext)
+        public AuthController(GeoProfContext dataContext, IConfiguration configuration)
         {
             this.dataContext = dataContext;
+            jwtService = new JWTService(configuration.GetSection("AppSettings:Token").Value);
         }
 
         //[HttpPost("register")]
@@ -50,16 +53,19 @@ namespace GeoProf.Controllers
                 return NotFound("User was not found");
             }
 
-            if (user.Password == null)
+            if (model.Password != user.Password)
             {
-                return BadRequest("Password does not match");
+                return BadRequest("Email or Password does not match");
             }
 
             return Ok(new
             {
-                user = user.Id,
-                userName = user.Username,
-                password = user.Password,
+                token = jwtService.CreateJWT(user),
+                user.Username,
+                user.Persoonlijk,
+                user.Vakantie,
+                user.Ziek,
+                user.Id,
             });
         }
     }
