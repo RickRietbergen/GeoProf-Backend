@@ -55,7 +55,7 @@ namespace GeoProf.Controllers
 
             if (model.Password != user.Password)
             {
-                return BadRequest("Email or Password does not match");
+                return BadRequest("Username or Password does not match");
             }
 
             return Ok(new
