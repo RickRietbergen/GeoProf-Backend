@@ -22,27 +22,27 @@ namespace GeoProf.Controllers
             jwtService = new JWTService(configuration.GetSection("AppSettings:Token").Value);
         }
 
-        //[HttpPost("register")]
-        //public async Task<ActionResult<User>> Register(UserCreationModel model)
-        //{
-        //    var user = await dataContext.Users.Where(g => g.Username == model.Username).FirstOrDefaultAsync();
+        [HttpPost("register")]
+        public async Task<ActionResult<User>> Register(UserCreationModel model)
+        {
+            var user = await dataContext.Users.Where(g => g.Username == model.Username).FirstOrDefaultAsync();
 
-        //    if (user != null)
-        //    {
-        //        return BadRequest("Username is already in use.");
-        //    }
+            if (user != null)
+            {
+                return BadRequest("Username is already in use.");
+            }
 
-        //    var newUser = new User();
+            var newUser = new User();
 
-        //    newUser.Username = model.Username;
-        //    newUser.Password = model.Password;
-        //    newUser.Role = Role.werknemer;
+            newUser.Username = model.Username;
+            newUser.Password = model.Password;
+            newUser.Role = Role.werknemer;
 
-        //    dataContext.Users.Add(newUser);
-        //    dataContext.SaveChanges();
+            dataContext.Users.Add(newUser);
+            dataContext.SaveChanges();
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserLoginModel model)
