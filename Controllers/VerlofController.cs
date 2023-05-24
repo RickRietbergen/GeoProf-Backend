@@ -19,5 +19,13 @@ namespace GeoProf.Controllers
         {
             this.dataContext = dataContext;
         }
+
+        [HttpPost("VerlofAanvraag")]
+        public async Task<IActionResult> Post(Model name)
+        {
+            var result = TryGetUserId(out var userId);
+
+            if (!result) return Unauthorized();
+        }
     }
 }
