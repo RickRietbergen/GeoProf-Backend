@@ -1,13 +1,12 @@
-﻿namespace GeoProf.Entities
+﻿namespace GeoProf.Models
 {
-    public class Verlof
+    public class VerlofCreateModel
     {
-        public int Id { get; set; }
         public string VerlofReden { get; set; }
         public DateTime From { get; set; }
-        public DateTime Until { get; set; }
+        public DateTime To { get; set; }
         public string Beschrijving { get; set; }
-        public bool isPending { get; set;}
+        public bool isPending { get; set; }
         public bool isApproved { get; private set; }
     }
 }
