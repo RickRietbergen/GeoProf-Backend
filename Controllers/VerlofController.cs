@@ -32,10 +32,10 @@ namespace GeoProf.Controllers
             var newVerlof = new Verlof
             {
                 //UserId = (int)UserId,
-                VerlofReden = model.VerlofReden ?? "",
+                VerlofReden = model.VerlofReden,
                 From = model.From,
                 Until = model.Until,
-                Beschrijving = model.Beschrijving ?? "",
+                Beschrijving = model.Beschrijving,
                 IsPending = model.IsPending = true,
                 IsApproved = model.IsApproved = false,
             };
