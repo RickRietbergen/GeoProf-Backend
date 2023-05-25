@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeoProf.Migrations
 {
     [DbContext(typeof(GeoProfContext))]
-    [Migration("20230524085451_AddVerlofs")]
+    [Migration("20230525085249_AddVerlofs")]
     partial class AddVerlofs
     {
         /// <inheritdoc />
@@ -66,8 +66,18 @@ namespace GeoProf.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Beschrijving")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPending")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
@@ -75,12 +85,6 @@ namespace GeoProf.Migrations
                     b.Property<string>("VerlofReden")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("isPending")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

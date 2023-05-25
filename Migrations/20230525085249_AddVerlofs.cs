@@ -20,8 +20,9 @@ namespace GeoProf.Migrations
                     VerlofReden = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     From = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Until = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    isPending = table.Column<bool>(type: "bit", nullable: false),
-                    isApproved = table.Column<bool>(type: "bit", nullable: false)
+                    Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPending = table.Column<bool>(type: "bit", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
