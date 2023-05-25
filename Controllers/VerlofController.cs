@@ -5,6 +5,7 @@ using GeoProf.Models;
 using GeoProf.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GeoProf.Controllers
 {
@@ -21,7 +22,7 @@ namespace GeoProf.Controllers
         }
 
         [HttpPost("VerlofAanvraag")]
-        public async Task<IActionResult> Post(Model name)
+        public async Task<IActionResult> Post(VerlofCreateModel model)
         {
             var result = TryGetUserId(out var userId);
 
