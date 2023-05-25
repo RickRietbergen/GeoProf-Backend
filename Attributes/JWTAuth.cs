@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using GeoProf.Services;
 using System.Security.Claims;
-using GeoProf.Enums;
-using GeoProf.Services;
 
 namespace GeoProf.Attributes
 {

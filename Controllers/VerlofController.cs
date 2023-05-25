@@ -3,6 +3,7 @@ using GeoProf.Entities;
 using GeoProf.Enums;
 using GeoProf.Models;
 using GeoProf.Services;
+using GeoProf.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -23,6 +24,7 @@ namespace GeoProf.Controllers
         }
 
         [HttpPost("VerlofAanvraag")]
+        //[JWTAuth(Role.werknemer | Role.admin)]
         public async Task<ActionResult<Verlof>> Post(VerlofCreateModel model)
         {
             //var result = TryGetUserId(out var userId);
