@@ -7,7 +7,7 @@
         public DateTime From { get; set; }
         public DateTime Until { get; set; }
         public string Beschrijving { get; set; }
-        public bool isPending { get; set;}
-        public bool isApproved { get; private set; }
+        public bool IsPending { get; set;}
+        public bool IsApproved { get; private set; }
     }
 }
