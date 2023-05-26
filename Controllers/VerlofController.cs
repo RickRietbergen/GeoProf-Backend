@@ -27,13 +27,12 @@ namespace GeoProf.Controllers
         //[JWTAuth(Role.werknemer | Role.admin)]
         public async Task<ActionResult<Verlof>> Post(VerlofCreateModel model)
         {
-            //var result = TryGetUserId(out var userId);
-
-            //if (!result) return Unauthorized();
+            var result = TryGetUserId(out var userId);
+            if (!result) return Unauthorized();
 
             var newVerlof = new Verlof
             {
-                //UserId = (int)UserId,
+                UserId = (int)userId,
                 VerlofReden = model.VerlofReden,
                 From = model.From,
                 Until = model.Until,
