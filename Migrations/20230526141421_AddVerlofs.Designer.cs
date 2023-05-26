@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeoProf.Migrations
 {
     [DbContext(typeof(GeoProfContext))]
-    [Migration("20230525085249_AddVerlofs")]
+    [Migration("20230526141421_AddVerlofs")]
     partial class AddVerlofs
     {
         /// <inheritdoc />
@@ -82,13 +82,29 @@ namespace GeoProf.Migrations
                     b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("VerlofReden")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Verlofs");
+                });
+
+            modelBuilder.Entity("GeoProf.Entities.Verlof", b =>
+                {
+                    b.HasOne("GeoProf.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
