@@ -24,7 +24,7 @@ namespace GeoProf.Controllers
         }
 
         [HttpPost("VerlofAanvraag")]
-        //[JWTAuth(Role.werknemer | Role.admin)]
+        [JWTAuth(Role.werknemer | Role.admin)]
         public async Task<IActionResult> Post(VerlofCreateModel model)
         {
             var result = TryGetUserId(out var userId);
@@ -37,8 +37,8 @@ namespace GeoProf.Controllers
                 From = model.From,
                 Until = model.Until,
                 Beschrijving = model.Beschrijving,
-                IsPending = model.IsPending = true,
-                IsApproved = model.IsApproved = false,
+                IsPending = true,
+                IsApproved = false,
             };
 
             await dataContext.Verlofs.AddAsync(newVerlof);
