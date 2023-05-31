@@ -46,5 +46,48 @@ namespace GeoProf.Controllers
 
             return Ok();
         }
+
+        [HttpGet()]
+        [JWTAuth(Role.werknemer | Role.manager | Role.admin)]
+        public async Task<ActionResult<VerlofTableModel>> Get()
+        {
+            var result = TryGetUserRoles(out var userRoles);
+            if (!result) { return Unauthorized(); }
+
+            var result2 = TryGetUserId(out var userId);
+            if (!result) { return Unauthorized(); }
+
+            var query = dataContext.Verlofs
+                .Include(x => x.User);
+
+            var verlofs = await query.ToListAsync();
+
+            //if (userRoles != Role.manager)
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+
+            var models = verlofs.Select(Verlof => new VerlofTableModel
+            {
+                Id = Verlof.Id,
+                UserId = Verlof.UserId,
+                Username = Verlof.User.Username,
+                VerlofReden = Verlof.VerlofReden,
+                From = Verlof.From,
+                Until = Verlof.Until,
+                Beschrijving = Verlof.Beschrijving,
+                IsPending = Verlof.IsPending,
+                IsApproved = Verlof.IsApproved,
+                Vakantie = Verlof.User.Vakantie,
+                Persoonlijk = Verlof.User.Persoonlijk,
+                Ziek = Verlof.User.Ziek,
+            });
+            
+            return Ok(models);
+        }
     }
 }
