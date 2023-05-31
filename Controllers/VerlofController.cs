@@ -47,8 +47,8 @@ namespace GeoProf.Controllers
             return Ok();
         }
 
-        [HttpGet("GetVerlof")]
-
+        [HttpGet()]
+        [JWTAuth(Role.werknemer | Role.manager | Role.admin)]
         public async Task<ActionResult<VerlofTableModel>> Get()
         {
             var result = TryGetUserRoles(out var userRoles);
