@@ -41,7 +41,6 @@ namespace GeoProf.Controllers
                 IsApproved = model.IsApproved = false,
             };
 
-
             await dataContext.Verlofs.AddAsync(newVerlof);
             await dataContext.SaveChangesAsync();
 
