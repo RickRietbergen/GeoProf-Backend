@@ -57,39 +57,6 @@ namespace GeoProf.Migrations
 
                     b.ToTable("Users");
                 });
-
-            modelBuilder.Entity("GeoProf.Entities.Verlof", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Beschrijving")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPending")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Until")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("VerlofReden")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Verlofs");
-                });
 #pragma warning restore 612, 618
         }
     }

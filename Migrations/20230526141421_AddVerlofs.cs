@@ -17,6 +17,7 @@ namespace GeoProf.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     VerlofReden = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     From = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Until = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -27,7 +28,18 @@ namespace GeoProf.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Verlofs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Verlofs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Verlofs_UserId",
+                table: "Verlofs",
+                column: "UserId");
         }
 
         /// <inheritdoc />

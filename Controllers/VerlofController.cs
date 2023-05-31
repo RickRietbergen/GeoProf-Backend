@@ -24,24 +24,22 @@ namespace GeoProf.Controllers
         }
 
         [HttpPost("VerlofAanvraag")]
-        //[JWTAuth(Role.werknemer | Role.admin)]
-        public async Task<ActionResult<Verlof>> Post(VerlofCreateModel model)
+        [JWTAuth(Role.werknemer | Role.admin)]
+        public async Task<IActionResult> Post(VerlofCreateModel model)
         {
-            //var result = TryGetUserId(out var userId);
-
-            //if (!result) return Unauthorized();
+            var result = TryGetUserId(out var userId);
+            if (!result) return Unauthorized();
 
             var newVerlof = new Verlof
             {
-                //UserId = (int)UserId,
+                UserId = (int)userId,
                 VerlofReden = model.VerlofReden,
                 From = model.From,
                 Until = model.Until,
                 Beschrijving = model.Beschrijving,
-                IsPending = model.IsPending = true,
-                IsApproved = model.IsApproved = false,
+                IsPending = true,
+                IsApproved = false,
             };
-
 
             await dataContext.Verlofs.AddAsync(newVerlof);
             await dataContext.SaveChangesAsync();
