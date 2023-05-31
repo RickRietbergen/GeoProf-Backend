@@ -25,7 +25,7 @@ namespace GeoProf.Controllers
 
         [HttpPost("VerlofAanvraag")]
         //[JWTAuth(Role.werknemer | Role.admin)]
-        public async Task<ActionResult<Verlof>> Post(VerlofCreateModel model)
+        public async Task<IActionResult> Post(VerlofCreateModel model)
         {
             var result = TryGetUserId(out var userId);
             if (!result) return Unauthorized();
