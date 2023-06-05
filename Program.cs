@@ -1,4 +1,5 @@
 using GeoProf.DataBase;
+using GeoProf.Seeders;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,5 +34,15 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<GeoProfContext>();
+
+    var seeder = new DataSeeder(context);
+
+    seeder.Seed();
+}
 
 app.Run();

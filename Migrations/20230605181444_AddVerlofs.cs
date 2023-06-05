@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -23,6 +22,7 @@ namespace GeoProf.Migrations
                     Until = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPending = table.Column<bool>(type: "bit", nullable: false),
+                    IsDenied = table.Column<bool>(type: "bit", nullable: false),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

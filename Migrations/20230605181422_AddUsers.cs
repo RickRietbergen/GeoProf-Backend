@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -21,6 +22,7 @@ namespace GeoProf.Migrations
                     Vakantie = table.Column<int>(type: "int", nullable: false),
                     Persoonlijk = table.Column<int>(type: "int", nullable: false),
                     Ziek = table.Column<int>(type: "int", nullable: false),
+                    AfdelingId = table.Column<int>(type: "int", nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

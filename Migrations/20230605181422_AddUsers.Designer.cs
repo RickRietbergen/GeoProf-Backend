@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeoProf.Migrations
 {
     [DbContext(typeof(GeoProfContext))]
-    [Migration("20230526141421_AddVerlofs")]
-    partial class AddVerlofs
+    [Migration("20230605181422_AddUsers")]
+    partial class AddUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,23 @@ namespace GeoProf.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("GeoProf.Entities.Afdeling", b =>
+                {
+                    b.Property<int>("AfdelingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AfdelingId"));
+
+                    b.Property<string>("AfdelingNaam")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AfdelingId");
+
+                    b.ToTable("afdelingen");
+                });
+
             modelBuilder.Entity("GeoProf.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -32,6 +49,9 @@ namespace GeoProf.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AfdelingId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -74,6 +94,9 @@ namespace GeoProf.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDenied")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPending")
