@@ -1,4 +1,5 @@
 ﻿using GeoProf.Entities;
+using GeoProf.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace GeoProf.DataBase
@@ -12,5 +13,6 @@ namespace GeoProf.DataBase
 
         public DbSet<User> Users { get; set; }
         public DbSet<Verlof> Verlofs { get; set; }
+        public DbSet<Afdeling> afdelingen { get; set; }
     }
 }
