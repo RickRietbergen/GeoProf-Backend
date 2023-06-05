@@ -23,6 +23,14 @@ namespace GeoProf.Seeders
                 new User { Username = "stijn", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
             };
 
+            var verlofs = new List<Verlof>
+            {
+                new Verlof { UserId = 1, VerlofReden = "vacation", From = new DateTime(2023, 6, 6), Until = new DateTime(2023, 6, 8), Beschrijving = "ik wil graag verlof hebben", IsPending = true, IsDenied = false, IsApproved = false },
+                new Verlof { UserId = 2, VerlofReden = "personal", From = new DateTime(2023, 6, 7), Until = new DateTime(2023, 6, 9), Beschrijving = "ik wil meer frontenden", IsPending = true, IsDenied = false, IsApproved = false },
+                new Verlof { UserId = 3, VerlofReden = "vacation", From = new DateTime(2023, 6, 11), Until = new DateTime(2023, 6, 14), Beschrijving = "ik kan iedereen verslaan", IsPending = true, IsDenied = false, IsApproved = false },
+                new Verlof { UserId = 4, VerlofReden = "sick", From = new DateTime(2023, 6, 13), Until = new DateTime(2023, 6, 17), Beschrijving = "ik wil niet blijven gpt'en", IsPending = true, IsDenied = false, IsApproved = false },
+            };
+
             var afdelingen = new List<Afdeling>
             {
                 new Afdeling { AfdelingNaam = "Office Management" },
@@ -35,6 +43,7 @@ namespace GeoProf.Seeders
             };
 
             dataContext.Users.AddRange(users);
+            dataContext.Verlofs.AddRange(verlofs);
             dataContext.afdelingen.AddRange(afdelingen);
             dataContext.SaveChanges();
         }
