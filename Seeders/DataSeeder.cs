@@ -17,18 +17,18 @@ namespace GeoProf.Seeders
         {
             var users = new List<User>
             {
-                new User { Username = "rick", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
-                new User { Username = "tijn", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
-                new User { Username = "justin", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
-                new User { Username = "stijn", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
+                new User { Username = "rick", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, AfdelingId = 7, Role = Role.admin}, 
+                new User { Username = "tijn", Password = "123", Vakantie = 18, Persoonlijk = 0, Ziek = 0, AfdelingId = 1, Role = Role.admin}, 
+                new User { Username = "justin", Password = "123", Vakantie = 16, Persoonlijk = 0, Ziek = 0, AfdelingId = 5, Role = Role.manager}, 
+                new User { Username = "stijn", Password = "123", Vakantie = 14, Persoonlijk = 0, Ziek = 0, AfdelingId = 4, Role = Role.werknemer}, 
             };
 
             var verlofs = new List<Verlof>
             {
                 new Verlof { UserId = 1, VerlofReden = "vacation", From = new DateTime(2023, 6, 6), Until = new DateTime(2023, 6, 8), Beschrijving = "ik wil graag verlof hebben", IsPending = true, IsDenied = false, IsApproved = false },
-                new Verlof { UserId = 2, VerlofReden = "personal", From = new DateTime(2023, 6, 7), Until = new DateTime(2023, 6, 9), Beschrijving = "ik wil meer frontenden", IsPending = true, IsDenied = false, IsApproved = false },
+                new Verlof { UserId = 2, VerlofReden = "personal", From = new DateTime(2023, 6, 7), Until = new DateTime(2023, 6, 9), Beschrijving = "ik wil meer frontenden", IsPending = false, IsDenied = false, IsApproved = true },
                 new Verlof { UserId = 3, VerlofReden = "vacation", From = new DateTime(2023, 6, 11), Until = new DateTime(2023, 6, 14), Beschrijving = "ik kan iedereen verslaan", IsPending = true, IsDenied = false, IsApproved = false },
-                new Verlof { UserId = 4, VerlofReden = "sick", From = new DateTime(2023, 6, 13), Until = new DateTime(2023, 6, 17), Beschrijving = "ik wil niet blijven gpt'en", IsPending = true, IsDenied = false, IsApproved = false },
+                new Verlof { UserId = 4, VerlofReden = "sick", From = new DateTime(2023, 6, 13), Until = new DateTime(2023, 6, 17), Beschrijving = "ik wil niet blijven gpt'en", IsPending = false, IsDenied = true, IsApproved = false },
             };
 
             var afdelingen = new List<Afdeling>
