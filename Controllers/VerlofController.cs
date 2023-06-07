@@ -38,6 +38,7 @@ namespace GeoProf.Controllers
                 Until = model.Until,
                 Beschrijving = model.Beschrijving,
                 IsPending = true,
+                IsDenied = false,
                 IsApproved = false,
             };
 
@@ -81,6 +82,7 @@ namespace GeoProf.Controllers
                 Until = Verlof.Until,
                 Beschrijving = Verlof.Beschrijving,
                 IsPending = Verlof.IsPending,
+                IsDenied = Verlof.IsDenied,
                 IsApproved = Verlof.IsApproved,
                 Vakantie = Verlof.User.Vakantie,
                 Persoonlijk = Verlof.User.Persoonlijk,
