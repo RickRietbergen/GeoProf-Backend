@@ -1,6 +1,7 @@
 ﻿using GeoProf.DataBase;
 using GeoProf.Entities;
 using GeoProf.Enums;
+using GeoProf.Migrations;
 using GeoProf.Models;
 using GeoProf.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace GeoProf.Controllers
     public class AuthController : BaseController
     {
         private readonly GeoProfContext dataContext;
+        private readonly Afdelingen afdelingen;
         private readonly JWTService jwtService;
 
 
@@ -58,6 +60,11 @@ namespace GeoProf.Controllers
                 return BadRequest("Username or Password does not match");
             }
 
+            var afdeling = await dataContext.afdelingen
+                .FirstOrDefaultAsync(a => a.AfdelingId == user.AfdelingId);
+
+            var afdelingNaam = afdeling?.AfdelingNaam;
+
             return Ok(new
             {
                 token = jwtService.CreateJWT(user),
@@ -66,6 +73,8 @@ namespace GeoProf.Controllers
                 user.Vakantie,
                 user.Ziek,
                 user.Id,
+                user.Role,
+                afdelingnaam = afdelingNaam,
             });
         }
     }
