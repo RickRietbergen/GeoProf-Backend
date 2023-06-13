@@ -6,8 +6,6 @@ using GeoProf.Services;
 using GeoProf.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GeoProf.Controllers
 {
@@ -59,18 +57,12 @@ namespace GeoProf.Controllers
             if (!result) { return Unauthorized(); }
 
             var query = dataContext.Verlofs
-                .Include(x => x.User);
+                .Include(x => x.User)
+                .ThenInclude(u => u.Afdeling);
 
             var verlofs = await query.ToListAsync();
 
-            //if (userRoles != Role.manager)
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
+            var user = await dataContext.Users.Include(a => a.Afdeling).FirstOrDefaultAsync(u => u.Id == userId);
 
             var models = verlofs.Select(Verlof => new VerlofTableModel
             {
@@ -87,6 +79,7 @@ namespace GeoProf.Controllers
                 Vakantie = Verlof.User.Vakantie,
                 Persoonlijk = Verlof.User.Persoonlijk,
                 Ziek = Verlof.User.Ziek,
+                afdelingsnaam = Verlof.User.Afdeling?.AfdelingNaam,
             });
             
             return Ok(models);
