@@ -4,5 +4,7 @@
     {
         public int AfdelingId { get; set; }
         public string AfdelingNaam { get; set; }
+
+        public User User { get; set; }
     }
 }

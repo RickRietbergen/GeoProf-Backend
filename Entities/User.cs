@@ -12,6 +12,7 @@ namespace GeoProf.Entities
         public int Ziek { get; set; }
         public int AfdelingId { get; set; }
         public Role Role { get; set; }
+
         public Afdeling Afdeling { get; set; }
     }
 }
