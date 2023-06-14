@@ -28,6 +28,10 @@ namespace GeoProf.Controllers
             var result = TryGetUserId(out var userId);
             if (!result) return Unauthorized();
 
+            var startDate = model.From;
+            var endDate = model.Until;
+            var totalDays = endDate - startDate;
+
             var newVerlof = new Verlof
             {
                 UserId = (int)userId,
@@ -35,6 +39,7 @@ namespace GeoProf.Controllers
                 From = model.From,
                 Until = model.Until,
                 Beschrijving = model.Beschrijving,
+                TotalDays = totalDays.Days + 1,
                 IsPending = true,
                 IsDenied = false,
                 IsApproved = false,
@@ -83,6 +88,22 @@ namespace GeoProf.Controllers
             });
             
             return Ok(models);
+        }
+
+        [HttpGet("DaysTaken")]
+        [JWTAuth(Role.werknemer | Role.admin)]
+        public async Task<ActionResult<DaysTakenModel>> GetDaysTaken()
+        {
+            var result = TryGetUserId(out var userId);
+            if (!result) return Unauthorized();
+
+            var user = await dataContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            return Ok(new DaysTakenModel
+            {
+                TotalDaysAvailable = user.Vakantie,
+                DaysTaken = user.Vakantie -  await dataContext.Verlofs.Where(x => x.UserId == userId && x.From.Year == DateTime.Now.Year).SumAsync(x => x.TotalDays)
+            });
         }
     }
 }
