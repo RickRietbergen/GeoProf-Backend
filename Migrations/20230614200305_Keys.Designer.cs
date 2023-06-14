@@ -4,6 +4,7 @@ using GeoProf.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeoProf.Migrations
 {
     [DbContext(typeof(GeoProfContext))]
-    partial class GeoProfContextModelSnapshot : ModelSnapshot
+    [Migration("20230614200305_Keys")]
+    partial class Keys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,6 @@ namespace GeoProf.Migrations
                     b.HasKey("AfdelingId");
 
                     b.ToTable("afdelingen");
-
-                    b.Navigation("User")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("GeoProf.Entities.User", b =>
@@ -75,18 +75,9 @@ namespace GeoProf.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AfdelingId")
-                        .IsUnique();
+                    b.HasIndex("AfdelingId");
 
                     b.ToTable("Users");
-
-                    b.HasOne("GeoProf.Entities.Afdeling", "Afdeling")
-                        .WithOne("User")
-                        .HasForeignKey("GeoProf.Entities.User", "AfdelingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Afdeling");
                 });
 
             modelBuilder.Entity("GeoProf.Entities.Verlof", b =>
@@ -131,7 +122,19 @@ namespace GeoProf.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Verlofs");
+                });
 
+            modelBuilder.Entity("GeoProf.Entities.User", b =>
+                {
+                    b.HasOne("GeoProf.Entities.Afdeling", "Afdeling")
+                        .WithMany()
+                        .HasForeignKey("AfdelingId");
+
+                    b.Navigation("Afdeling");
+                });
+
+            modelBuilder.Entity("GeoProf.Entities.Verlof", b =>
+                {
                     b.HasOne("GeoProf.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")

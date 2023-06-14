@@ -10,7 +10,7 @@ namespace GeoProf.Entities
         public int Vakantie { get; set; }
         public int Persoonlijk { get; set; }
         public int Ziek { get; set; }
-        public int AfdelingId { get; set; }
+        public int? AfdelingId { get; set; }
         public Role Role { get; set; }
 
         public Afdeling Afdeling { get; set; }
