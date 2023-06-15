@@ -59,7 +59,7 @@ namespace GeoProf.Controllers
             if (!result) { return Unauthorized(); }
 
             var result2 = TryGetUserId(out var userId);
-            if (!result) { return Unauthorized(); }
+            if (!result2) { return Unauthorized(); }
 
             var query = dataContext.Verlofs
                 .Include(x => x.User)
@@ -102,7 +102,7 @@ namespace GeoProf.Controllers
             return Ok(new DaysTakenModel
             {
                 TotalDaysAvailable = user.Vakantie,
-                DaysTaken = user.Vakantie -  await dataContext.Verlofs.Where(x => x.UserId == userId && x.From.Year == DateTime.Now.Year).SumAsync(x => x.TotalDays)
+                DaysTaken = user.Vakantie - await dataContext.Verlofs.Where(x => x.UserId == userId && x.From.Year == DateTime.Now.Year).SumAsync(x => x.TotalDays)
             });
         }
     }
