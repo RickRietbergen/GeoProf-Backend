@@ -29,9 +29,9 @@ namespace GeoProf.Seeders
             var users = new List<User>
             {
                 new User { Username = "rick", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[6], Role = Role.admin}, 
-                new User { Username = "tijn", Password = "123", Vakantie = 18, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[2], Role = Role.admin}, 
-                new User { Username = "justin", Password = "123", Vakantie = 16, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[3], Role = Role.manager}, 
-                new User { Username = "stijn", Password = "123", Vakantie = 14, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[4], Role = Role.werknemer}, 
+                new User { Username = "tijn", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[0], Role = Role.admin}, 
+                new User { Username = "justin", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[4], Role = Role.manager}, 
+                new User { Username = "stijn", Password = "123", Vakantie = 20, Persoonlijk = 0, Ziek = 0, Afdeling = afdelingen[3], Role = Role.werknemer}, 
             };
 
             var verlofs = new List<Verlof>
