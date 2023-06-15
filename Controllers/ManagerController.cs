@@ -22,7 +22,7 @@ namespace GeoProf.Controllers
         [JWTAuth(Role.manager | Role.admin)]
         public async Task<ActionResult<ManagerDashboard>> Dashboard()
         {
-            var users = await dataContext.Users.ToListAsync();
+            var users = await dataContext.Users.Where(u => u.Role == Role.werknemer).ToListAsync();
             var verlofs = await dataContext.Verlofs.Where(v => v.IsPending == true).ToListAsync();
             var employeeIsSick = await dataContext.Verlofs.Where(e => e.VerlofReden == "Sick").ToListAsync();
 
