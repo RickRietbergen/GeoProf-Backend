@@ -102,7 +102,7 @@ namespace GeoProf.Controllers
             return Ok(new DaysTakenModel
             {
                 TotalDaysAvailable = user.Vakantie,
-                DaysTaken = user.Vakantie - await dataContext.Verlofs.Where(x => x.UserId == userId && x.From.Year == DateTime.Now.Year).SumAsync(x => x.TotalDays)
+                DaysTaken = user.Vakantie - await dataContext.Verlofs.Where(x => x.UserId == userId && x.IsApproved && x.From.Year == DateTime.Now.Year).SumAsync(x => x.TotalDays)
             });
         }
     }
