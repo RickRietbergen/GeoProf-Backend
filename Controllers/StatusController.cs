@@ -18,15 +18,19 @@ namespace GeoProf.Controllers
             this.dataContext = dataContext;
         }
 
+        //Put functie, alleen de manager en admin kunnen in deze functie.
         [HttpPut("denied/{id}")]
         [JWTAuth(Role.manager | Role.admin)]
         public async Task<IActionResult> Denied(int id)
         {
+            //haal de geselecteerde aanvraag op.
             var selectedAanvraag = await dataContext.Verlofs.Where(a => a.Id == id).FirstOrDefaultAsync();
             if (selectedAanvraag == null)
             {
                 return BadRequest("Verlof Request does not exist");
             }
+
+            //pas de waardes aan, zodat de aanvraag wordt afgekeurd.
             selectedAanvraag.IsPending = false;
             selectedAanvraag.IsDenied = true;
 
@@ -34,16 +38,19 @@ namespace GeoProf.Controllers
 
             return Ok();
         }
-
+        //Put functie, alleen de manager en admin kunnen in deze functie.
         [HttpPut("approved/{id}")]
         [JWTAuth(Role.manager | Role.admin)]
         public async Task<IActionResult> Approved(int id)
         {
+            //haal de geselecteerde aanvraag op.
             var selectedAanvraag = await dataContext.Verlofs.Where(a => a.Id == id).FirstOrDefaultAsync();
             if (selectedAanvraag == null)
             {
                 return BadRequest("Verlof Request does not exist");
             }
+
+            //pas de waardes aan, zodat de aanvraag wordt goedgekeurd.
             selectedAanvraag.IsPending = false;
             selectedAanvraag.IsApproved = true;
 
