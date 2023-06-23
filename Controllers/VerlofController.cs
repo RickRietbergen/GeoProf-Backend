@@ -29,10 +29,24 @@ namespace GeoProf.Controllers
             var result = TryGetUserId(out var userId);
             if (!result) return Unauthorized();
 
+            var daysTaken = await dataContext.Verlofs.Where(x => x.UserId == userId).SumAsync(x => x.TotalDays);
+            var user = await dataContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
             //startdatum en eindatum setten en berekenen.
             var startDate = model.From;
             var endDate = model.Until;
             var totalDays = endDate - startDate;
+
+            //checks vakantie dagen kleiner dan 0, dan geef error naar frontend.
+            if (totalDays.Days + 1 < 0)
+            {
+                return BadRequest("Het aantal vakantiedagen is kleiner dan '0'");
+            }
+
+            if ((user.Vakantie - daysTaken) - (totalDays.TotalDays + 1) < 0)
+            {
+                return BadRequest("Werknemer heeft niet genoeg vakantiedagen");
+            }
 
             //return data
             var newVerlof = new Verlof
