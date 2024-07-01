@@ -42,7 +42,7 @@ using (var scope = app.Services.CreateScope())
 
     var seeder = new DataSeeder(context);
 
-    seeder.Seed();
+    //seeder.Seed();
 }
 
 app.Run();
