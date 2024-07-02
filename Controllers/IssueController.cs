@@ -1,5 +1,7 @@
-﻿using GeoProf.DataBase;
+﻿using GeoProf.Attributes;
+using GeoProf.DataBase;
 using GeoProf.Entities;
+using GeoProf.Enums;
 using GeoProf.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,8 @@ namespace GeoProf.Controllers
             this.dataContext = dataContext;
         }
 
+        [HttpPost("create")]
+        [JWTAuth(Role.admin)]
         public async Task<ActionResult> CreateIssue(IssueCreationModel model)
         {
             var selectedUser = await dataContext.Users.Where(u => u.Id != model.UserId).FirstOrDefaultAsync();
