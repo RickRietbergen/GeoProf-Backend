@@ -14,5 +14,6 @@ namespace GeoProf.DataBase
         public DbSet<User> Users { get; set; }
         public DbSet<Verlof> Verlofs { get; set; }
         public DbSet<Afdeling> afdelingen { get; set; }
+        public DbSet<Issue> Issues { get; set; }
     }
 }
