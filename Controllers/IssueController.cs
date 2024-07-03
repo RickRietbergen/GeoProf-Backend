@@ -74,5 +74,22 @@ namespace GeoProf.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("delete")]
+        [JWTAuth(Role.admin)]
+        public async Task<ActionResult> DeleteIssue(int id)
+        {
+            var selectedIssue = await dataContext.Issues.Where(i => i.Id == id).FirstOrDefaultAsync();
+
+            if (selectedIssue == null)
+            {
+                return BadRequest("Issue not found.");
+            }
+
+            dataContext.Issues.Remove(selectedIssue);
+            await dataContext.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
