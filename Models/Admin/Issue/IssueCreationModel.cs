@@ -1,4 +1,4 @@
-﻿namespace GeoProf.Models
+﻿namespace GeoProf.Models.Admin.Issue
 {
     public class IssueCreationModel
     {
